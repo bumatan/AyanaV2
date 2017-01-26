@@ -1,7 +1,7 @@
 const Command = require('./command');
 const getVoiceChannel = require('../utils/index');
 
-function async sleep(ms) {
+async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
