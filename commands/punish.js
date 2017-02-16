@@ -15,6 +15,7 @@ class Punish extends Command {
 				let counter = 0;
 				function deafenIteration(){
 					if(counter == 6) {
+						message.reply('This shall do for now...');
 						return;
 					}
 					member.setDeaf(deafen).then(() => {
@@ -25,7 +26,6 @@ class Punish extends Command {
 				}
 				deafenIteration();
 
-				message.reply('This shall do for now...');
 				return;
 			}
 		}
