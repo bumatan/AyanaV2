@@ -29,3 +29,5 @@ class Punish extends Command {
 		}
 	}
 }
+
+module.exports = Punish;
