@@ -2,7 +2,7 @@ const Command = require('./command');
 const getVoiceChannel = require('../utils/index');
 
 class Punish extends Command {
-	contructor() {
+	constructor() {
 		super('punish');
 	}
 
