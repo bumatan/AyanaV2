@@ -9,25 +9,26 @@ class Punish extends Command {
 	run(message) {
 		const name = this.getArgs(message)[0];
 		const voiceChannel = getVoiceChannel(message.guild);
-		console.log(name, voiceChannel.members.keys().next());
-		if (voiceChannel.members.get(name)) {
-			const member = voiceChannel.members.get(name);
-			let deafen = true;
-			let counter = 0;
-			let interval = setInterval(function(){
-				if(counter == 6) {
-					clearInterval(interval);
-				}
-				member.setDeaf(deafen);
-				deafen = !deafen;
-				counter++;
-			}, 100);
+		for (let member of voiceChannel.members.values()) {
+			if(member.displayName === name) {
+				const member = voiceChannel.members.get(name);
+				let deafen = true;
+				let counter = 0;
+				let interval = setInterval(function(){
+					if(counter == 6) {
+						clearInterval(interval);
+					}
+					member.setDeaf(deafen);
+					deafen = !deafen;
+					counter++;
+				}, 100);
 
-			message.reply('This shall do for now...');
+				message.reply('This shall do for now...');
+				return;
+			}
 		}
-		else {
-			message.reply('No such filthy human is currently present');
-		}
+
+		message.reply('No such filthy human is currently present');
 	}
 }
 
