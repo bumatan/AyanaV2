@@ -9,6 +9,7 @@ class Punish extends Command {
 	run(message) {
 		const name = this.getArgs(message)[0];
 		const voiceChannel = getVoiceChannel(message.guild);
+		console.log(name, voiceChannel.members.keys().next());
 		if (voiceChannel.members.get(name)) {
 			const member = voiceChannel.members.get(name);
 			let deafen = true;
