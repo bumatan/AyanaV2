@@ -11,7 +11,6 @@ class Punish extends Command {
 		const voiceChannel = getVoiceChannel(message.guild);
 		for (let member of voiceChannel.members.values()) {
 			if(member.displayName === name) {
-				const member = voiceChannel.members.get(name);
 				let deafen = true;
 				let counter = 0;
 				let interval = setInterval(function(){
