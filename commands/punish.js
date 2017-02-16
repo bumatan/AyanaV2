@@ -21,7 +21,7 @@ class Punish extends Command {
 					member.setDeaf(deafen).then(() => {
 						deafen = !deafen;
 						counter++;
-						setTimeout(deafenIteration, 50);
+						setTimeout(deafenIteration, 150);
 					}, (err) => console.log(err));
 				}
 				deafenIteration();
