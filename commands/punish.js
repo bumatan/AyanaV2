@@ -1,10 +1,6 @@
 const Command = require('./command');
 const getVoiceChannel = require('../utils/index');
 
-async function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 class Punish extends Command {
 	contructor() {
 		super('punish');
@@ -15,12 +11,17 @@ class Punish extends Command {
 		const voiceChannel = getVoiceChannel(message.guild);
 		if (voiceChannel.members.has(name)) {
 			const member = voiceChannel.members[name];
-			for (int i = 0; i < 5; i++) {
-				member.setDeaf(true);
-				await sleep(100);
-				member.setDeaf(false);
-				await sleep(100);
-			}
+			let deafen = true;
+			let counter = 0;
+			let interval = setInterval(function(){
+				if(counter == 6) {
+					clearInterval(interval);
+				}
+				member.setDeaf(deafen);
+				deafen = !deafen;
+				counter++;
+			}, 100);
+
 			message.reply('This shall do for now...');
 		}
 		else {
