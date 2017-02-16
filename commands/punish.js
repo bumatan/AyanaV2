@@ -14,14 +14,14 @@ class Punish extends Command {
 				let deafen = true;
 				let counter = 0;
 				function deafenIteration(){
-					if(counter == 6) {
+					if(counter == 30) {
 						message.reply('This shall do for now...');
 						return;
 					}
 					member.setDeaf(deafen).then(() => {
 						deafen = !deafen;
 						counter++;
-						setTimeout(deafenIteration, 500);
+						setTimeout(deafenIteration, 50);
 					}, (err) => console.log(err));
 				}
 				deafenIteration();
