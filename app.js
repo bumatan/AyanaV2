@@ -20,17 +20,30 @@ bot.on('message', message => {
 });
 
 bot.on('voiceStateUpdate', (oldMember, newMember) => {
-	if (oldMember.voiceChannel === undefined && newMember.voiceChannel) {
-		let channel = getTextChannel(newMember.guild);
-		if (channel) {
-			channel.sendMessage(newMember.displayName + " has joined the channel!",{tts: true})
-		}
+	
+	let channel = getTextChannel(newMember.guild);
+	
+	function isAfk(member) {
+		let guild = member.guild;
+		return member.voiceChannelID === guild.afkChannelID;
 	}
-	else if(oldMember.voiceChannel && newMember.voiceChannel === undefined) {
-		let channel = getTextChannel(oldMember.guild);
+
+	function tryTTS(message) {
 		if (channel) {
-			channel.sendMessage(newMember.displayName + " has left the channel :(",{tts: true})
+			channel.sendMessage(message,{tts: true});
+			return true;
 		}
+		return false;
+	}
+
+	if (oldMember.voiceChannel === undefined && newMember.voiceChannel) {
+		tryTTS(newMember.displayName + " has joined the channel!");
+	}
+	else if (oldMember.voiceChannel && newMember.voiceChannel === undefined) {
+		tryTTS(newMember.displayName + " has left the channel :(");
+	}
+	else if (!isAfk(oldMember) && isAfk(newMember)) {
+		tryTTS(newMember.displayName + " is afk.");
 	}
 });
 
