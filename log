@@ -1,0 +1,1 @@
+ssh -ti ~/.ssh/digital_ocean_deploy deploy@46.101.251.17 log
