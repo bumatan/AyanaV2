@@ -41,5 +41,12 @@ module.exports = {
 
 		return null;
 	},
+	getTextChannel: (guild) => {
+		for(const channel of guild.channels.array()) {
+			if(channel instanceof discord.TextChannel) {
+				return channel;
+			}
+		}		
+	}
 	songLoop
 };
