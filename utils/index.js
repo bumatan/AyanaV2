@@ -1,6 +1,27 @@
 const discord = require('discord.js');
 const state = require('./state');
 const ytdl = require('ytdl-core');
+const tts = require('./tts/say');
+
+function tryTTS(message) {
+		//Should be configurable
+	 	useSay = true;
+		if (useSay) {
+			tts.speak(message, function(err) {
+				if(err) {
+					console.log(err);
+				}
+				else {
+					return true;
+				}
+			});
+		}
+		if (channel) {
+			channel.sendMessage(message,{tts: true});
+			return true;
+		}
+		return false;
+}
 
 function songLoop() {
 	if(state.playing === undefined) {
@@ -48,5 +69,9 @@ module.exports = {
 			}
 		}		
 	},
+	isAfk: (member) => {
+		return member.voiceChannelID === guild.afkChannelID;
+	},
+	tryTTS,
 	songLoop
 };

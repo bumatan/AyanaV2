@@ -2,10 +2,47 @@ const discord = require('discord.js');
 const commands = require('./commands');
 const ytdl = require('ytdl-core');
 const state = require('./utils/state');
-const { getTextChannel } = require('./utils')
+const { getVoiceChannel, getTextChannel, isAfk } = require('./utils');
 
 const bot = state.client = new discord.Client();
 
+//TODO: extract event handles to a seperate file
+
+//event handlers
+function handleTTS(guild, message) {
+	//if not connected to a channel
+	if(bot.voiceConnections.get(guild) === undefined)
+	{
+		let channel = getVoiceChannel(guild);
+		channel.join().then(connection => {
+			if(!tryTTS(message)) {
+				console.log("failed to tts")
+			}	
+		});
+	}
+	else {
+		if(!tryTTS(message)) {
+			console.log("failed to tts")
+		}
+	}
+}
+
+function memberJoinedChannel(member) {
+	let message = `${newMember.displayName} has joined the channel!`;
+	handleTTS(guild, message);
+}
+
+function memberLeftChannel(member) {
+	let message = `${newMember.displayName} has left the channel :(`;
+	handleTTS(guild, message);
+}
+
+function memberAfk(member) {
+	let message = `${newMember.displayName} is afk.`;
+	handleTTS(guild, message);
+}
+
+//event registration
 bot.on('ready', () => {
   	console.log('I am ready!');
 });
@@ -20,33 +57,20 @@ bot.on('message', message => {
 });
 
 bot.on('voiceStateUpdate', (oldMember, newMember) => {
+	let guild = newMember.guild;
+	let channel = getTextChannel(guild);
 	
-	let channel = getTextChannel(newMember.guild);
-	
-	function isAfk(member) {
-		let guild = member.guild;
-		return member.voiceChannelID === guild.afkChannelID;
-	}
-
-	function tryTTS(message) {
-		if (channel) {
-			channel.sendMessage(message,{tts: true});
-			return true;
-		}
-		return false;
-	}
-
 	if (oldMember.voiceChannel === undefined && newMember.voiceChannel) {
-		tryTTS(`${newMember.displayName} has joined the channel!`);
+		memberJoinedChannel(newMember);
 	}
 	else if (oldMember.voiceChannel && newMember.voiceChannel === undefined) {
-		tryTTS(`${newMember.displayName} has left the channel :(`);
+		memberLeftChannel(oldMember);
 	}
 	else if (!isAfk(oldMember) && isAfk(newMember)) {
-		tryTTS(`${newMember.displayName} is afk.`);
+		memberLeftChannel(oldMember);
 	}
 	else if (!isAfk(newMember) && isAfk(oldMember)) {
-		tryTTS(`${newMember.displayName} has joined the channel!`);
+		memberJoinedChannel(newMember);
 	}
 });
 
