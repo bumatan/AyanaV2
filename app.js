@@ -21,7 +21,7 @@ bot.on('message', message => {
 
 bot.on('voiceStateUpdate', (oldMember, newMember) => {
 	console.log(oldMember.voiceChannel,newMember.voiceChannel);
-	if (oldMember.voiceChannel != undefined && newMember.voiceChannel) {
+	if (oldMember.voiceChannel === undefined && newMember.voiceChannel) {
 		let channel = getTextChannel(newMember.guild);
 		if (channel) {
 			channel.sendMessage(newMember.displayName + " has joined the channel!",{tts: true})
