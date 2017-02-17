@@ -7,7 +7,7 @@ class StopCommand extends Command {
 	}
 
 	run(message) {
-		if(state.stream) {
+		if(state.playing) {
 			message.reply('stopping, finally I thought you will never let me go');
 			state.songs = [];
 			state.stream.end();
