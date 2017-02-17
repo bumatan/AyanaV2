@@ -16,6 +16,8 @@ function handleTTS(guild, message) {
 		tts(guild, message);
 	}, error => {
 		console.log(error);
+	}).catch((e) => {
+		console.log(e);
 	});
 }
 
