@@ -7,7 +7,7 @@ class Leave extends Command {
 
 	run(message) {
 		let connection = message.guild.voiceConnection;
-		if (channel) {
+		if (connection) {
 			connection.disconnect();
 		}
 	}
