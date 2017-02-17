@@ -14,6 +14,8 @@ function handleTTS(guild, message) {
 	const channel = getVoiceChannel(guild);
 	(bot.voiceConnections.get(guild.id) ? new Promise(resolve => resolve()) : channel.join()).then(connection => {
 		tts(guild, message);
+	}, error => {
+		console.log(error);
 	});
 }
 
