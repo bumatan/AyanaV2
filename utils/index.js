@@ -27,7 +27,6 @@ function isAfk(guild, member) {
 
 function tts(guild, message) {
 	const connection = getVoiceChannel(guild).connection;
-	console.log("in tts: " + connection);
 	const child = spawn('espeak', ['--stdout', message]);
 	connection.playStream(child.stdout, { seek: 0, volume: 1 });
 }
