@@ -61,16 +61,16 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
 	let channel = getTextChannel(guild);
 	
 	if (oldMember.voiceChannel === undefined && newMember.voiceChannel) {
-		memberJoinedChannel(newMember);
+		memberJoinedChannel(guild, newMember);
 	}
 	else if (oldMember.voiceChannel && newMember.voiceChannel === undefined) {
-		memberLeftChannel(oldMember);
+		memberLeftChannel(guild, oldMember);
 	}
 	else if (!isAfk(oldMember) && isAfk(newMember)) {
-		memberLeftChannel(oldMember);
+		memberLeftChannel(guild, oldMember);
 	}
 	else if (!isAfk(newMember) && isAfk(oldMember)) {
-		memberJoinedChannel(newMember);
+		memberJoinedChannel(guild, newMember);
 	}
 });
 
