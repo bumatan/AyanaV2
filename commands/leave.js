@@ -13,6 +13,7 @@ class Leave extends Command {
 			if(state.playing) {
 				state.reset();
 			}
+			message.reply('couldn\'t stand your human smell anyways...');
 		}
 	}
 }
