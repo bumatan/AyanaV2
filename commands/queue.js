@@ -17,7 +17,7 @@ class QueueCommand extends Command {
 			message.reply('queuing, your human desires disgust me');
 		}).catch((e) => {
 			console.log(e);
-			message.reply('no such song, ignorant human');
+			message.reply('failed to load your stupid noise');
 		});
 	}
 }
