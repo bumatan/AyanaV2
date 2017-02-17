@@ -1,4 +1,5 @@
 const Command = require('./command');
+const state = require('../utils/state')
 
 class Leave extends Command {
 	constructor() {
