@@ -12,6 +12,7 @@ const bot = state.client = new discord.Client();
 function handleTTS(guild, message) {
 	//if not connected to a channel
 	const channel = getVoiceChannel(guild);
+	console.log("In handle: " + bot.voiceConnections.get(guild.id));
 	(bot.voiceConnections.get(guild.id) ? new Promise(resolve => resolve()) : channel.join()).then(connection => {
 		tts(guild, message);
 	});
