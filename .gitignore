@@ -1,2 +1,5 @@
 node_modules/
 config.json
+deploy
+log
+checkout

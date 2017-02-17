@@ -1,7 +1,7 @@
 const discord = require('discord.js');
 const state = require('./state');
 const ytdl = require('ytdl-core');
-const tts = require('../tts');
+const spawn = require('child_process').spawn;
 
 function getVoiceChannel(guild) {
 	for(const channel of guild.channels.array()) {
@@ -25,25 +25,10 @@ function isAfk(guild, member) {
 	return member.voiceChannelID === guild.afkChannelID;
 }
 
-function tryTTS(guild, message) {
-		//Should be configurable
-	 	useSay = true;
-		if (useSay) {
-			tts.speak(message, function(err) {
-				if(err) {
-					console.log(err);
-				}
-				else {
-					return true;
-				}
-			});
-		}
-		let channel = getVoiceChannel(guild);
-		if (channel) {
-			channel.sendMessage(message,{tts: true});
-			return true;
-		}
-		return false;
+function tts(guild, message) {
+	const connection = getVoiceChannel(guild).connection;
+	const child = spawn('espeak', ['--stdout', message]);
+	connection.playStream(child.stdout, { seek: 0, volume: 1 });
 }
 
 function songLoop() {
@@ -79,6 +64,6 @@ module.exports = {
 	getVoiceChannel,
 	getTextChannel,
 	isAfk,
-	tryTTS,
+	tts,
 	songLoop
 };

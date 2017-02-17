@@ -2,7 +2,7 @@ const discord = require('discord.js');
 const commands = require('./commands');
 const ytdl = require('ytdl-core');
 const state = require('./utils/state');
-const { getVoiceChannel, getTextChannel, isAfk, tryTTS } = require('./utils');
+const { getVoiceChannel, getTextChannel, isAfk, tts } = require('./utils');
 
 const bot = state.client = new discord.Client();
 
@@ -11,20 +11,10 @@ const bot = state.client = new discord.Client();
 //event handlers
 function handleTTS(guild, message) {
 	//if not connected to a channel
-	if(bot.voiceConnections.get(guild) === undefined)
-	{
-		let channel = getVoiceChannel(guild);
-		channel.join().then(connection => {
-			if(!tryTTS(guild, message)) {
-				console.log("failed to tts")
-			}	
-		});
-	}
-	else {
-		if(!tryTTS(guild, message)) {
-			console.log("failed to tts")
-		}
-	}
+	const channel = getVoiceChannel(guild);
+	(bot.voiceConnections.get(guild) ? new Promise(resolve => resolve()) : channel.join()).then(connection => {
+		tts(guild, message);
+	});
 }
 
 function memberJoinedChannel(guild, member) {
