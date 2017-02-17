@@ -47,6 +47,7 @@ bot.on('message', message => {
 });
 
 bot.on('voiceStateUpdate', (oldMember, newMember) => {
+	if (newMember.displayName === "AyanaV2") return;
 	let guild = newMember.guild;
 	let channel = getTextChannel(guild);
 	
