@@ -45,6 +45,9 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
 	else if (!isAfk(oldMember) && isAfk(newMember)) {
 		tryTTS(newMember.displayName + " is afk.");
 	}
+	else if (!isAfk(newMember) && isAfk(oldMember)) {
+		tryTTS(newMember.displayName + " has joined the channel!");
+	}
 });
 
 bot.login(require('./config.json').discordToken);
