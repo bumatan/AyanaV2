@@ -27,6 +27,12 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
 			channel.sendMessage(newMember.displayName + " has joined the channel!",{tts: true})
 		}
 	}
+	else if(oldMember.voiceChannel && newMember.voiceChannel === undefined) {
+		let channel = getTextChannel(oldMember.guild);
+		if (channel) {
+			channel.sendMessage(newMember.displayName + " has left the channel :(",{tts: true})
+		}
+	}
 });
 
 bot.login(require('./config.json').discordToken);
