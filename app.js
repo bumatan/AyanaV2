@@ -15,13 +15,13 @@ function handleTTS(guild, message) {
 	{
 		let channel = getVoiceChannel(guild);
 		channel.join().then(connection => {
-			if(!tryTTS(message)) {
+			if(!tryTTS(guild, message)) {
 				console.log("failed to tts")
 			}	
 		});
 	}
 	else {
-		if(!tryTTS(message)) {
+		if(!tryTTS(guild, message)) {
 			console.log("failed to tts")
 		}
 	}
@@ -66,10 +66,10 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
 	else if (oldMember.voiceChannel && newMember.voiceChannel === undefined) {
 		memberLeftChannel(guild, oldMember);
 	}
-	else if (!isAfk(oldMember) && isAfk(newMember)) {
+	else if (!isAfk(guild, oldMember) && isAfk(guild, newMember)) {
 		memberLeftChannel(guild, oldMember);
 	}
-	else if (!isAfk(newMember) && isAfk(oldMember)) {
+	else if (!isAfk(guild, newMember) && isAfk(guild, oldMember)) {
 		memberJoinedChannel(guild, newMember);
 	}
 });

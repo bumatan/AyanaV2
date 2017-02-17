@@ -3,7 +3,7 @@ const state = require('./state');
 const ytdl = require('ytdl-core');
 const tts = require('../tts');
 
-function tryTTS(message) {
+function tryTTS(guild, message) {
 		//Should be configurable
 	 	useSay = true;
 		if (useSay) {
@@ -69,7 +69,7 @@ module.exports = {
 			}
 		}		
 	},
-	isAfk: (member) => {
+	isAfk: (guild, member) => {
 		return member.voiceChannelID === guild.afkChannelID;
 	},
 	tryTTS,
