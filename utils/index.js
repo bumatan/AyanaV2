@@ -1,7 +1,7 @@
 const discord = require('discord.js');
 const state = require('./state');
 const ytdl = require('ytdl-core');
-const tts = require('../tts/say');
+const tts = require('../tts');
 
 function tryTTS(message) {
 		//Should be configurable
