@@ -2,7 +2,7 @@ const discord = require('discord.js');
 const commands = require('./commands');
 const ytdl = require('ytdl-core');
 const state = require('./utils/state');
-const { getVoiceChannel, getTextChannel, isAfk } = require('./utils');
+const { getVoiceChannel, getTextChannel, isAfk, tryTTS } = require('./utils');
 
 const bot = state.client = new discord.Client();
 
