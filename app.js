@@ -20,7 +20,7 @@ bot.on('message', message => {
 });
 
 bot.on('voiceStateUpdate', (oldMember, newMember) => {
-	console.log(oldMember,newMember);
+	console.log(oldMember.voiceChannel,newMember.voiceChannel);
 	if (oldMember.voiceChannel != undefined && newMember.voiceChannel) {
 		let channel = getTextChannel(newMember.guild);
 		if (channel) {
