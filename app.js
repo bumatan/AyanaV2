@@ -37,16 +37,16 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
 	}
 
 	if (oldMember.voiceChannel === undefined && newMember.voiceChannel) {
-		tryTTS(newMember.displayName + " has joined the channel!");
+		tryTTS("@${newMember.displayName} has joined the channel!");
 	}
 	else if (oldMember.voiceChannel && newMember.voiceChannel === undefined) {
-		tryTTS(newMember.displayName + " has left the channel :(");
+		tryTTS("@${newMember.displayName} has left the channel :(");
 	}
 	else if (!isAfk(oldMember) && isAfk(newMember)) {
-		tryTTS(newMember.displayName + " is afk.");
+		tryTTS("@${newMember.displayName} is afk.");
 	}
 	else if (!isAfk(newMember) && isAfk(oldMember)) {
-		tryTTS(newMember.displayName + " has joined the channel!");
+		tryTTS("@${newMember.displayName} has joined the channel!");
 	}
 });
 
