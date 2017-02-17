@@ -9,6 +9,9 @@ class Leave extends Command {
 		let connection = message.guild.voiceConnection;
 		if (connection) {
 			connection.disconnect();
+			if(state.playing) {
+				state.reset();
+			}
 		}
 	}
 }

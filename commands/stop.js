@@ -12,6 +12,7 @@ class StopCommand extends Command {
 			state.songs = [];
 			state.stream.end();
 			state.streamDispatcher.end();
+			state.playing = false;
 		} else {
 			message.reply('there is currently no active song, why bother me?');
 		}
