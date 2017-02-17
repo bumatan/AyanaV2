@@ -1,6 +1,6 @@
 const Command = require('./command');
 
-class LeaveCommand extends Command {
+class Leave extends Command {
 	constructor() {
 		super('leave');
 	}
@@ -12,3 +12,5 @@ class LeaveCommand extends Command {
 		}
 	}
 }
+
+module.exports = Leave;
