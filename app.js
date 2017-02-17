@@ -27,17 +27,17 @@ function handleTTS(guild, message) {
 	}
 }
 
-function memberJoinedChannel(member) {
+function memberJoinedChannel(guild, member) {
 	let message = `${member.displayName} has joined the channel!`;
 	handleTTS(guild, message);
 }
 
-function memberLeftChannel(member) {
+function memberLeftChannel(guild, member) {
 	let message = `${member.displayName} has left the channel :(`;
 	handleTTS(guild, message);
 }
 
-function memberAfk(member) {
+function memberAfk(guild, member) {
 	let message = `${member.displayName} is afk.`;
 	handleTTS(guild, message);
 }
