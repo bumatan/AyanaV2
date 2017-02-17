@@ -5,7 +5,7 @@ function escapeRegExp(str) {
 
 class Command {
 	constructor(name) {
-		this.prefix = '(.)(.)';
+		this.prefix = '$';
 		this.name = name;
 	}
 
