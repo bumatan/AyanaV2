@@ -3,6 +3,28 @@ const state = require('./state');
 const ytdl = require('ytdl-core');
 const tts = require('../tts');
 
+function getVoiceChannel(guild) {
+	for(const channel of guild.channels.array()) {
+		if(channel instanceof discord.VoiceChannel) {
+			return channel;
+		}
+	}
+
+	return null;
+}
+
+function getTextChannel(guild) {
+	for(const channel of guild.channels.array()) {
+		if(channel instanceof discord.TextChannel) {
+			return channel;
+		}
+	}		
+}
+
+function isAfk(guild, member) {
+	return member.voiceChannelID === guild.afkChannelID;
+}
+
 function tryTTS(guild, message) {
 		//Should be configurable
 	 	useSay = true;
@@ -16,6 +38,7 @@ function tryTTS(guild, message) {
 				}
 			});
 		}
+		let channel = getVoiceChannel(guild);
 		if (channel) {
 			channel.sendMessage(message,{tts: true});
 			return true;
@@ -53,25 +76,9 @@ function songLoop() {
 
 
 module.exports = {
-	getVoiceChannel: (guild) => {
-		for(const channel of guild.channels.array()) {
-			if(channel instanceof discord.VoiceChannel) {
-				return channel;
-			}
-		}
-
-		return null;
-	},
-	getTextChannel: (guild) => {
-		for(const channel of guild.channels.array()) {
-			if(channel instanceof discord.TextChannel) {
-				return channel;
-			}
-		}		
-	},
-	isAfk: (guild, member) => {
-		return member.voiceChannelID === guild.afkChannelID;
-	},
+	getVoiceChannel,
+	getTextChannel,
+	isAfk,
 	tryTTS,
 	songLoop
 };
