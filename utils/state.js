@@ -1,9 +1,9 @@
 module.exports = {
 	reset: function(){
-		songs = [];
-		stream.end();
-		streamDispatcher.end();
-		playing = false;
+		this.songs = [];
+		this.stream.end();
+		this.streamDispatcher.end();
+		this.playing = false;
 	},
 	songs: [],
 	playing: false
