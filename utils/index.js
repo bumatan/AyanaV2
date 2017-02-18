@@ -28,7 +28,7 @@ function isAfk(guild, member) {
 
 function tts(guild, message) {
 	const connection = getVoiceChannel(guild).connection;
-	const textToWAV = spawn('espeak', ['-ven-us+f4', '-s170', '--stdout', message]);
+	const textToWAV = spawn('pico2wave', ['-w', '/var/local/pico2wav.wav', message]);
 	const WAVToMP3 = spawn('lame', ['-V2', '-', '-']);
 
 	textToWAV.stdout.pipe(WAVToMP3.stdin);
