@@ -28,6 +28,8 @@ function isAfk(guild, member) {
 function tts(guild, message) {
 	const connection = getVoiceChannel(guild).connection;
 	const child = spawn('espeak', ['--stdout', message]);
+	child.stdout.on('data', () => console.log('hi im from stdout'));
+	child.stderr.on('data', () => console.log('hi im from stderr'));
 	connection.playStream(child.stdout, { seek: 0, volume: 1 });
 }
 
