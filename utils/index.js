@@ -30,8 +30,8 @@ function tts(guild, message) {
 	const connection = getVoiceChannel(guild).connection;
 	const fileName = '/tmp/' + Date.now() + '.wav';
 	const textToWAV = spawnSync('pico2wave', ['-w', fileName, message]);
-	const WAVToMP3 = spawn('lame', ['-V2', fileName, '-']);
-	
+	const WAVToMP3 = spawn('lame', ['-V0', fileName, '-']);
+
 	WAVToMP3.on('close', () => fs.unlinkSync(fileName));
 	connection.playStream(WAVToMP3.stdout, { seek: 0, volume: 1 });
 }
