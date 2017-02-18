@@ -45,6 +45,7 @@ function songLoop() {
 		return;
 	}
 
+	console.log(state.songs.length);
 	if(state.songs.length === 0) {
 		state.playing = false;
 		return;
