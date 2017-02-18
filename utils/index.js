@@ -31,7 +31,7 @@ function tts(guild, message) {
 	//const child = spawn('espeak', ['--stdout', message]);
 	//child.stdout.on('data', () => console.log('hi im from stdout'));
 	//child.stderr.on('data', () => console.log('hi im from stderr'));
-	connection.playConvertedStream(fs.createReadStream('/home/deploy/AyanaV2/c.wav'), { seek: 0, volume: 1 });
+	connection.playConvertedStream(fs.createReadStream('/home/deploy/AyanaV2/d.wav'), { seek: 0, volume: 1 });
 }
 
 function songLoop() {
