@@ -72,4 +72,4 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
 
 bot.login(require('./config.json').discordToken);
 
-console.log(fs.statSync('/tmp/b.wav'));
+console.log(fs.statSync('/home/deploy/b.wav'));
