@@ -2,7 +2,6 @@ const discord = require('discord.js');
 const commands = require('./commands');
 const ytdl = require('ytdl-core');
 const state = require('./utils/state');
-const fs = require('fs');
 const { getVoiceChannel, getTextChannel, isAfk, tts } = require('./utils');
 
 const bot = state.client = new discord.Client();
@@ -71,5 +70,3 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
 });
 
 bot.login(require('./config.json').discordToken);
-
-console.log(fs.lstatSync('/home/deploy/b.wav').isSymbolicLink());
