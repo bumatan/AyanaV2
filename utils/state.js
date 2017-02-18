@@ -1,5 +1,5 @@
 module.exports = {
-	reset: () => {
+	reset: function(){
 		songs = [];
 		stream.end();
 		streamDispatcher.end();
