@@ -2,6 +2,7 @@ const discord = require('discord.js');
 const state = require('./state');
 const ytdl = require('ytdl-core');
 const spawn = require('child_process').spawn;
+const fs = require('fs');
 
 function getVoiceChannel(guild) {
 	for(const channel of guild.channels.array()) {
@@ -27,10 +28,10 @@ function isAfk(guild, member) {
 
 function tts(guild, message) {
 	const connection = getVoiceChannel(guild).connection;
-	const child = spawn('espeak', ['--stdout', message]);
-	child.stdout.on('data', () => console.log('hi im from stdout'));
-	child.stderr.on('data', () => console.log('hi im from stderr'));
-	connection.playStream(child.stdout, { seek: 0, volume: 1 });
+	//const child = spawn('espeak', ['--stdout', message]);
+	//child.stdout.on('data', () => console.log('hi im from stdout'));
+	//child.stderr.on('data', () => console.log('hi im from stderr'));
+	connection.playStream(fs.createReadStream('/home/deploy/AyanaV2/b.wav'), { seek: 0, volume: 1 });
 }
 
 function songLoop() {
