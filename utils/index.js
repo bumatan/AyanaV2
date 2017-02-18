@@ -33,7 +33,7 @@ function tts(guild, message) {
 	const WAVToMP3 = spawn('sox', [fileName, '-t', 'mp3', '-', 'vol', '-10dB']);
 
 	WAVToMP3.on('close', () => fs.unlinkSync(fileName));
-	connection.playStream(WAVToMP3.stdout, { seek: 0, volume: 2 });
+	connection.playStream(WAVToMP3.stdout, { seek: 0, volume: 6 });
 }
 
 function songLoop() {
