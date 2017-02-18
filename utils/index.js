@@ -53,8 +53,11 @@ function songLoop() {
 
 	state.playing = true;
 	const currentSong = state.songs.shift();
+	console.log(currentSong);
 	const connection = state.client.voiceConnections.first();
+	console.log(connection);
 	const stream = ytdl(currentSong, {filter : 'audioonly'});
+	console.log(stream);
 	state.streamDispatcher = connection.playStream(stream, { seek: 0, volume: 1 });
 
 	state.streamDispatcher.on('end', () => {
