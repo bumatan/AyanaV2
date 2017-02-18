@@ -15,11 +15,11 @@ function handleTTS(guild, message) {
 	(bot.voiceConnections.get(guild.id) ? new Promise(resolve => resolve()) : channel.join()).then(connection => {
 		tts(guild, message);
 	}, error => {
-		console.log(`Error in joining the voice channel. Error: ${error}`);
-		console.log(error);
+		//console.log(`Error in joining the voice channel. Error: ${error}`);
+		//console.log(error);
 	}).catch((e) => {
-		console.log(`Exception in tts. Exception: ${e}`);
-		console.log(e);
+		//console.log(`Exception in tts. Exception: ${e}`);
+		//console.log(e);
 	});
 }
 
